@@ -47,13 +47,13 @@ func (m *Moe) Spinner(name string) *Moe {
 	return m
 }
 
-// Frame frames to the given string which must not use spaces.
+// Frame custom frames
 func (m *Moe) Frame(frames []string) *Moe {
 	m.frames = frames
 	return m
 }
 
-// Color frames color
+// Color spinner color
 func (m *Moe) Color(c string) *Moe {
 	m.color = colorMap[c]
 	return m
@@ -87,7 +87,7 @@ func (m *Moe) Start() *Moe {
 	return m
 }
 
-// Stop hides the spinner.
+// Stop hide spinner
 func (m *Moe) Stop() bool {
 	if x := atomic.SwapUint64(&m.active, 0); x > 0 {
 		fmt.Printf(ClearLine)
@@ -96,6 +96,7 @@ func (m *Moe) Stop() bool {
 	return false
 }
 
+// next spinner token
 func (m *Moe) next() string {
 	r := m.frames[m.pos%len(m.frames)]
 	m.pos++
