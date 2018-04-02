@@ -10,16 +10,20 @@ import (
 // ClearLine go to the beggining of the line and clear it
 const ClearLine = "\r\033[K"
 
-// returns a valid color's foreground text color attribute
-var colorMap = map[string]int{
-	"red":     31,
-	"green":   32,
-	"yellow":  33,
-	"blue":    34,
-	"magenta": 35,
-	"cyan":    36,
-	"white":   37,
-}
+const (
+	// Red red color code
+	Red = 31 + iota
+	// Green greent color code
+	Green
+	// Yellow yellow color code
+	Yellow
+	// Blue blue color code
+	Blue
+	// Magenta magenta color code
+	Magenta
+	// White white color code
+	White
+)
 
 // Moe spinner type
 type Moe struct {
@@ -54,8 +58,8 @@ func (m *Moe) Frame(frames []string) *Moe {
 }
 
 // Color spinner color
-func (m *Moe) Color(c string) *Moe {
-	m.color = colorMap[c]
+func (m *Moe) Color(color int) *Moe {
+	m.color = color
 	return m
 }
 

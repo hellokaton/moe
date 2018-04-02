@@ -16,14 +16,14 @@ func main() {
 		}()
 	}
 
-	// moe := moe.New("正在为您加载").Color("blue")
+	// moe := moe.New("正在为您加载").Color(moe.Blue)
 	// moe.Start()
 	// time.Sleep(2 * time.Second)
 
 	// moe.Text("稍后看到精彩内容..").Spinner("clock")
 	// time.Sleep(2 * time.Second)
 
-	// moe.Text("这或许需要点儿时间..").Color("yellow").Spinner("bouncingBall")
+	// moe.Text("这或许需要点儿时间..").Color(moe.Yellow).Spinner("bouncingBall")
 	// time.Sleep(2 * time.Second)
 
 	// moe.Stop()
