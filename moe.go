@@ -23,7 +23,7 @@ var colorMap = map[string]int{
 
 // Moe spinner type
 type Moe struct {
-	speed  int
+	speed  time.Duration
 	color  int
 	frames []string
 	pos    int
@@ -60,7 +60,7 @@ func (m *Moe) Color(c string) *Moe {
 }
 
 // Speed speed
-func (m *Moe) Speed(speed int) *Moe {
+func (m *Moe) Speed(speed time.Duration) *Moe {
 	m.speed = speed
 	return m
 }
@@ -81,7 +81,7 @@ func (m *Moe) Start() *Moe {
 		for atomic.LoadUint64(&m.active) > 0 {
 			next := m.next()
 			fmt.Printf(m.text, next)
-			time.Sleep(time.Duration(m.speed) * time.Millisecond)
+			time.Sleep(m.speed)
 		}
 	}()
 	return m

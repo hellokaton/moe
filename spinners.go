@@ -3,6 +3,7 @@ package moe
 import (
 	"encoding/json"
 	"fmt"
+	"time"
 )
 
 var spinnersJSON = []byte(`{
@@ -866,14 +867,8 @@ var spinnersJSON = []byte(`{
 // SpinnerMap spinners
 var SpinnerMap map[string]Moe
 
-// Spinner spinner struct
-type spinner struct {
-	Speed  int
-	Frames []string
-}
-
 func init() {
-	var tempMap map[string]spinner
+	var tempMap map[string]map[string]interface{}
 	SpinnerMap = make(map[string]Moe)
 
 	err := json.Unmarshal(spinnersJSON, &tempMap)
@@ -881,7 +876,15 @@ func init() {
 		fmt.Println("Can't decode json message", err)
 		return
 	}
+
 	for key, value := range tempMap {
-		SpinnerMap[key] = Moe{speed: value.Speed, frames: value.Frames}
+		speed := time.Duration(value["speed"].(float64)) * time.Millisecond
+		types := value["frames"].([]interface{})
+		var paramSlice []string
+		for _, param := range types {
+			paramSlice = append(paramSlice, param.(string))
+		}
+		SpinnerMap[key] = Moe{speed: speed, frames: paramSlice}
 	}
+
 }
