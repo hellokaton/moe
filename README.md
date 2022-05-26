@@ -5,7 +5,7 @@ simple cli spinner by go.
 ## Usage
 
 ```bash
-go get -u github.com/biezhi/moe
+go get -u github.com/hellokaton/moe
 ```
 
 ```go
